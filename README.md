@@ -10,7 +10,6 @@
 [![PyPI format](https://img.shields.io/pypi/format/eadf.svg)](https://pypi.python.org/pypi/eadf/)
 [![PyPI implementation](https://img.shields.io/pypi/implementation/eadf.svg)](https://pypi.python.org/pypi/eadf/)
 [![PyPI version fury.io](https://badge.fury.io/py/eadf.svg)](https://pypi.python.org/pypi/eadf/)
-[![Open Source Love png2](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 ## Motivation
 
@@ -29,7 +28,7 @@ We also have recent documentation on [readthedocs](https://eadf.rtfd.io). Locall
 
 ### Contributing
 
-We are always happy about unhapppy users, who run into problems, report bugs, file pull requests or cheer for our nice package. If you want something merged, please create a pull request against `devel` and we are happy to review them.
+We are always happy about unhapppy users, who run into problems, report bugs, file pull requests or cheer for our nice package. If you want something merged, please create a pull request against `master` and we are happy to review them.
 
 ## References
 
