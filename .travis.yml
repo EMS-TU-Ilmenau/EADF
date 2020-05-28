@@ -1,0 +1,54 @@
+language: python
+
+sudo: required
+
+install:
+- pip install -r requirements.txt
+
+jobs:
+  allow_failures:
+  - os: osx
+
+jobs:
+  fast_finish: true
+
+env:
+  global:
+    - CODECOV_TOKEN="7989f6c1-b068-4763-aa04-d92463bf7918"
+
+env:
+  - EADF_BACKEND=numpy
+  - EADF_BACKEND=cupy
+
+env:
+  - EADF_LOWMEM=1
+  - EADF_LOWMEM=0
+
+env:
+  - EADF_DTYPE=single
+  - EADF_DTYPE=double
+
+os:
+  - linux
+
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+deploy:
+  provider: pypi
+  user:
+    secure: B+gKa6+lk8zF7quUjARtXuR8DJsCMY19gIvgNi+MoJ8BQIVr/1aW8iRn0WAhHqdeGNgIAIAvEoHBSwcknR80iFuyt5vxd4FEUkzGN9VfGbSfThAfse1DcDaz2d3VkQ+YFcnYKcymeK00zD+FamK7EImSbh0PlNrT+UaEJSxBiRhBaxHjn08MiwpOxb7x4F0XQPgmoyQDVvuNJgs3KVmGxZZlbMUBR+ovGjdCbb+F2nOqOv1JxF77z1aeLKQ0fyJLM1mpnkRySJ6C0La3c+PqTrZRRnGZmMSljg8Mn22SvuA5Ew8MZgBDL0vvrPoZEHx3phaaUJXUlDmnAAAbyTxGTRNE8D7cvR5RmQgXSJA+0eDSMu3mNlA0qqjrd7c5B4Ht61xw5h8aXJEZdgCsaSlkCgR95tLfDg51mpUHPhT5wjOGgpTarDe6JZJ+4Vc0YX9z1CvgShwVadh0LMw71YCKf0oxWz5r0OEovLtVYXTgVF3+K9cZgNg8fKv5NputMhwHDucFDZOUPlwaG3nhUiU7/hwVg0skI+x6RkiQChhgHSwi/26VELfdoq5kbLU5UDMxw6TlttD33UpOOPCSqVo/1aW1u6xCQO6uSfHXiyWdXCiLBGL1mAfS6niNu9NAF7wFj8fV6LN7BLzi/ueL8UhQzefbzDE7wWWV/A6YRSF1QPo=
+  password:
+    secure: TkPigJvluLFcjU8fAMeM1zEIX2DPGhFFDHAQrhfsF2HqerBUeLX935u30YUmkvHDvPf7m8DZ8o7ZBLlK8dGfjAAJXKO0ciPsVRML/+DorrM/PdtaVVZ2G5kxatXr5zbNPAG/x3Id/f92PElbpMWaJ+H2cSMsm0Z4Ppr5xdP0NuyjoObCN6jQYcNnj/IJ42p0x9ryMWsK1la7kHTteb1o8RCYztH/0OMLSYpOCw7pU5m/qb0HnuwedpC5CIaBHXGgnXlAWOMq+toQDiiiDoOcbSgFecTKynC55jJ63wfWyiCWwczpEsDpR4d/Fso3o3p9DmPkqYFDnuBN+4a2mMusR5gM4Pgqk0iPRek6YHOK10pp4DORAlsNeRGfEtMd8zATqbjxXy1dHjiOuANiuC4xBq2mWXN8slnuuBB2xBBDijh5SnwmnuUpIcpwDIPdqvpTg+AtVKOILJZ3deXl7S3MAdJ75Ux8UVGUtKesZaVn96s1Fta8eG4ZKV5bOLP2bmqkBnU8XK3I5eUi63xzmWYxUmKyMfLnRKJZ4W6tMYD6WGF0DwDdzXxDETvYgXdHBM8fudKS6If2Mo/uYGVewfVOH0EWDIlin+cPNjRZnK/wNRvlsWIn8YthriY4BahkDQz8QP8B15QbvKq961zYMxvgyUutDgyVKirrOC7HL5702Zo=
+  on:
+    branch: master
+    tags: true
+
+script:
+  - make stylecheck
+  - coverage run --source=eadf/ setup.py test
+
+after_success:
+  - codecov
